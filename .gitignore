@@ -1,0 +1,27 @@
+# Zig
+zig-out/
+zig-cache/
+.zig-cache/
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# AI / tooling
+.junie/
+.pi/
+
+# OS
+.DS_Store
+Thumbs.db
