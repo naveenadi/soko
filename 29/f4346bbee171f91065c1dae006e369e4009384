@@ -1,0 +1,26 @@
+docs/agents/issue-tracker.md
+  s_7de83f3d779e59::t_1e1e07a3696d97 1-30
+AGENTS.md
+  s_7de83f3d779e59::t_f1b480863853df 1-36
+  s_7de83f3d779e59::t_1e1e07a3696d97 37-50
+docs/agents/triage-labels.md
+  s_7de83f3d779e59::t_1e1e07a3696d97 1-15
+docs/agents/domain.md
+  s_7de83f3d779e59::t_1e1e07a3696d97 1-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "29f4346bbee171f91065c1dae006e369e4009384",
+  "prompts": {},
+  "sessions": {
+    "s_7de83f3d779e59": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a1655a-b6b5-74d7-b1b2-ef5d49fd5eec",
+        "model": "deepseek-v4.1-flash-free"
+      },
+      "human_author": "Aditya Agarwal <naveenagarwal123451@gmail.com>"
+    }
+  }
+}
