@@ -21,6 +21,7 @@ zig-cache/
 # AI / tooling
 .junie/
 .pi/
+.scratch/
 
 # OS
 .DS_Store
