@@ -7,12 +7,11 @@ Licenses below are recorded from each project's upstream. Re-check each one agai
 | Component | License | Where it is used | Phase |
 |---|---|---|---|
 | Zig toolchain | MIT | build only | all |
-| translate-c package | MIT | build only: C header translation for drivers | all |
 | libvaxis | MIT | core: terminal UI | all |
 | zigimg | MIT | core: libvaxis dependency | all |
 | uucode | MIT | core: libvaxis dependency (Unicode tables) | all |
 | musl libc | MIT | core: linked into the fully static Linux binary | all |
-| SQLite | Public domain | core: built-in adapter | 1 |
+| SQLite 3.54.1 | Public domain | core: built-in adapter, vendored amalgamation in `vendor/sqlite` | 1 |
 | libpq (PostgreSQL client library) | PostgreSQL License | postgres driver | 1 |
 | MariaDB Connector/C | LGPL-2.1-or-later | mysql/mariadb driver | 1 |
 | DuckDB | MIT | duckdb driver | 1 |

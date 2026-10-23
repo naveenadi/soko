@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.17.0
+
+      # Native build, then run it: the banner proves the binary starts and that
+      # SQLite is linked for real, not just that it compiled.
+      - name: Build (native)
+        run: zig build -Doptimize=ReleaseSafe
+      - name: Run banner
+        shell: bash
+        run: ./zig-out/bin/${{ matrix.os == 'windows-latest' && 'soko.exe' || 'soko' }}
+      - name: Test
+        run: zig build test
+
+      # Cross-compilation is part of the definition of done. These are built but
+      # not run here; each one runs natively on its own runner above.
+      - name: Cross-compile
+        shell: bash
+        run: |
+          set -e
+          for target in x86_64-linux-musl aarch64-linux-musl \
+                        x86_64-windows \
+                        x86_64-macos aarch64-macos; do
+            echo "::group::$target"
+            zig build -Dtarget=$target -Doptimize=ReleaseSafe
+            echo "::endgroup::"
+          done
+
+      - name: Assert Linux build is static
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -e
+          zig build -Dtarget=x86_64-linux-musl -Doptimize=ReleaseSafe
+          file zig-out/bin/soko
+          file zig-out/bin/soko | grep -Eq "statically linked|, static"

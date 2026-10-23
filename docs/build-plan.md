@@ -6,9 +6,11 @@ This document is the complete build plan and the source of truth for the roadmap
 
 | Item | State |
 |---|---|
+| Stage 1: repo layout, `build.zig`, CI cross-compile, C interop | **Done** (2026-10-24). `soko` builds native plus `x86_64-linux-musl`, `aarch64-linux-musl`, `x86_64-windows`, `x86_64-macos`, `aarch64-macos`; SQLite 3.54.1 compiled from the vendored amalgamation through `addTranslateC`. libpq link risk probed; drivers are native-per-platform. |
 | Phase 0 spike | Not started |
 | Phase 1 | Not started |
-| Deliverable 7: `docs/zig-upgrades.md` | Drafted. The libvaxis commit pin still needs to be verified by a build. |
+| Deliverable 7: `docs/zig-upgrades.md` | Drafted, plus verified Zig/SQLite pins and the C-interop probe. The libvaxis commit pin still needs to be verified by a build (Stage 4). |
+| Deliverable 9: repo layout, `build.zig`, README | `build.zig`, `build.zig.zon`, CI, and the source tree exist. README build instructions still to write. |
 | Deliverable 8: licensing document | Drafted as `THIRD_PARTY_LICENSES`. |
 | Everything else | Not started |
 
@@ -26,7 +28,8 @@ Soko is a fast, keyboard-driven terminal UI for working with many kinds of datab
 - TUI via **libvaxis**, pinned to a specific commit of upstream main. Its `build.zig.zon` declares `minimum_zig_version = "0.17.0"` (version 0.6.0), with upstream zigimg and uucode dependencies, so no fork or vendored patch is needed. Prefer a tagged release once one supports 0.17.0, and record the pinned commit and the re-pin procedure in `docs/zig-upgrades.md`. Until the vxfw runtime-crash report (issue #371) is understood, build on the low-level API rather than vxfw. Keep the choice behind a small `ui` module so it stays swappable.
 - Ships as **one self-contained binary** named `soko` for macOS, Linux, and Windows via Zig cross-compilation, with no third-party dynamic dependencies: fully static on Linux (musl), and linked only against the operating system's own libraries on macOS (`libSystem`) and Windows. There is a single release artifact, with no "full" variant. A build script and release instructions are provided.
 - **Database drivers are not shipped with the binary.** Each is a separate helper executable that users download and install on demand (see *Drivers: download and install*).
-- Drivers wrap C client libraries (libpq, libmysqlclient or MariaDB Connector/C, SQLite, DuckDB, hiredis) through the official **translate-c package** or hand-written `extern` declarations, isolated in one directory per driver. `@cImport` no longer exists in this Zig version, and `build.zig` must be written for the reworked build system.
+- Drivers wrap C client libraries (libpq, libmysqlclient or MariaDB Connector/C, SQLite, DuckDB, hiredis) through Zig's built-in `std.Build.addTranslateC` or hand-written `extern` declarations, isolated in one directory per driver. `@cImport` no longer exists in this Zig version, there is no separate translate-c package to pin, and `build.zig` must be written for the reworked build system.
+- Drivers are **built natively per platform**, not cross-compiled. The libpq probe (2026-10-24) showed a cross-musl link fails for want of a musl `libpq`, and DuckDB and MariaDB Connector/C are harder still. Per-platform release assets already make this fine; see `docs/zig-upgrades.md`.
 - **LGPL policy** for MariaDB Connector/C, in force before the first driver build: the driver's full build sources and object files are published with each release so users can relink (see `THIRD_PARTY_LICENSES`).
 - **No scripting in v1.** Customization is a TOML config for themes, keymaps, and connections. The core exposes an internal command registry and event bus, with keymaps and themes stored as data.
 

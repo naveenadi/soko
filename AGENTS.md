@@ -6,7 +6,8 @@ Soko is a terminal database client in Zig. `docs/build-plan.md` is the source of
 
 - Zig **0.17.0**, pinned exactly. Never bump it as part of another change; upgrades are their own task.
 - **libvaxis**, pinned to a commit (not a tag) until upstream tags a 0.17.0 release. Build on the low-level vaxis API only — **vxfw is off-limits** until issue #371 (deinit segfault on 0.17.0) is resolved. Keep the choice behind the `ui` module so it stays swappable.
-- `@cImport` no longer exists in this Zig version; use the translate-c package or hand-written `extern`. `build.zig` must target the reworked build system, not 0.13-era idioms.
+- `@cImport` no longer exists in this Zig version; use `std.Build.addTranslateC` (built into 0.17.0 — there is no separate package to pin) or hand-written `extern`. `build.zig` must target the reworked build system, not 0.13-era idioms.
+- Our vendored SQLite amalgamation (`vendor/sqlite`) is what `@import("sqlite")` resolves to; see `vendor/sqlite/README.md` for re-vendoring.
 - ZLS does not support 0.17.0, so expect no full editor integration. Don't add LSP-specific config.
 - Pins, re-pin procedure, and watch items live in `docs/zig-upgrades.md`. Record the SHA there when a pin lands.
 
@@ -34,6 +35,14 @@ Cross-compile targets are part of the definition of done: fully static on Linux 
 - License obligations for third-party libraries live in `THIRD_PARTY_LICENSES`. MariaDB Connector/C is LGPL, so its driver's build sources and object files ship with every release.
 - Sign off every commit (`git commit -s`) for the DCO. Contributions are Apache 2.0.
 - Project is at design stage: no source tree exists yet. Prefer small, runnable increments over scaffolding.
+- Project is at design stage: no source tree exists yet. Prefer small, runnable increments over scaffolding.
+
+### Core rules
+
+- Don't assume — ask or verify instead of guessing intent, APIs, or file locations.
+- Minimum code that solves the problem — no extra features, options, or abstractions.
+- Touch only what you must — no unrelated edits or refactors.
+- Define success criteria — state how the change will be verified before doing it.
 
 ## Agent skills
 
