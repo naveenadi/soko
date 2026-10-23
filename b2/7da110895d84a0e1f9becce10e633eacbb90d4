@@ -1,0 +1,37 @@
+.github/workflows/ci.yml
+  s_1a2c07d55240bc::t_02d9fd9597b8fd 1-26,28-51
+  s_1a2c07d55240bc::t_1133b0f74d7b61 27
+  s_1a2c07d55240bc::t_d0d134fb108ca8 52
+licenses/README.md
+  s_1a2c07d55240bc::t_d2708eae006798 1-9
+build.zig.zon
+  s_1a2c07d55240bc::t_3e6539c6df8b1a 1-3,5-15
+  s_1a2c07d55240bc::t_b8925517ed8f10 4
+build.zig
+  s_1a2c07d55240bc::t_393ee0ccbc61be 1-58
+src/main.zig
+  s_1a2c07d55240bc::t_9095c3c48fde1e 7-9,16
+  s_1a2c07d55240bc::t_3607c434dd97ae 1-6,10-15,17-22
+vendor/sqlite/sqlite3.c
+  s_1a2c07d55240bc::t_67d986e1a7c17c 1-271131
+vendor/sqlite/sqlite3.h
+  s_1a2c07d55240bc::t_785abfa0572de4 1-14447
+vendor/sqlite/README.md
+  s_1a2c07d55240bc::t_af0f8c86d74bb4 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b27da110895d84a0e1f9becce10e633eacbb90d4",
+  "prompts": {},
+  "sessions": {
+    "s_1a2c07d55240bc": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a16a51-e464-74d7-b1b2-ef5fe903b594",
+        "model": "deepseek-v4.1-flash-free"
+      },
+      "human_author": "Aditya Agarwal <naveenagarwal123451@gmail.com>"
+    }
+  }
+}
