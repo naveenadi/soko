@@ -27,14 +27,13 @@ zig build
 zig build test
 ```
 
-Cross-compile targets are part of the definition of done: fully static on Linux (musl), only OS libraries on macOS and Windows.
+Cross-compile targets are part of the definition of done for the `soko` core binary: fully static on Linux (musl), only OS libraries on macOS and Windows. Drivers are built natively per platform, not cross-compiled — see `docs/zig-upgrades.md` for details.
 
 ## Working conventions
 
 - Update the status table at the top of `docs/build-plan.md` when work lands; it is the only place that tracks progress.
 - License obligations for third-party libraries live in `THIRD_PARTY_LICENSES`. MariaDB Connector/C is LGPL, so its driver's build sources and object files ship with every release.
 - Sign off every commit (`git commit -s`) for the DCO. Contributions are Apache 2.0.
-- Project is at design stage: no source tree exists yet. Prefer small, runnable increments over scaffolding.
 - Project is at design stage: no source tree exists yet. Prefer small, runnable increments over scaffolding.
 
 ### Core rules

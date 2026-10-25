@@ -20,11 +20,17 @@ jobs:
 
       # Native build, then run it: the banner proves the binary starts and that
       # SQLite is linked for real, not just that it compiled.
+      - name: Check formatting
+        if: runner.os == 'Linux'
+        run: zig fmt --check build.zig src
+
       - name: Build (native)
         run: zig build -Doptimize=ReleaseSafe
       - name: Run banner
         shell: bash
-        run: ./zig-out/bin/${{ matrix.os == 'windows-latest' && 'soko.exe' || 'soko' }}
+        run: |
+          ./zig-out/bin/${{ matrix.os == 'windows-latest' && 'soko.exe' || 'soko' }} | grep -q "soko 0.1.0"
+          ./zig-out/bin/${{ matrix.os == 'windows-latest' && 'soko.exe' || 'soko' }} | grep -q "sqlite 3."
       - name: Test
         run: zig build test
 

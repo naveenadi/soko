@@ -18,8 +18,6 @@ pub fn build(b: *std.Build) void {
         .files = &.{"sqlite3.c"},
         .flags = &.{
             "-std=c11",
-            "-DSQLITE_DQS=0",
-            "-DSQLITE_DEFAULT_FOREIGN_KEYS=1",
             "-DSQLITE_ENABLE_FTS5",
             "-DSQLITE_ENABLE_RTREE",
             "-DSQLITE_OMIT_LOAD_EXTENSION",

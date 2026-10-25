@@ -18,5 +18,5 @@ pub fn main(init: std.process.Init) !void {
 }
 
 test "sqlite reports a version" {
-    try std.testing.expect(std.mem.startsWith(u8, std.mem.span(sqlite.sqlite3_libversion()), "3.5"));
+    try std.testing.expect(std.mem.eql(u8, std.mem.span(sqlite.sqlite3_libversion()), "3.54.1"));
 }
