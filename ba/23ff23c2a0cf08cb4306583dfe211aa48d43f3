@@ -1,0 +1,19 @@
+src/main.zig
+  s_1a2c07d55240bc::t_24c35f5788dac9 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ba23ff23c2a0cf08cb4306583dfe211aa48d43f3",
+  "prompts": {},
+  "sessions": {
+    "s_1a2c07d55240bc": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a16a51-e464-74d7-b1b2-ef5fe903b594",
+        "model": "deepseek-v4.1-flash-free"
+      },
+      "human_author": "Aditya Agarwal <naveenagarwal123451@gmail.com>"
+    }
+  }
+}
